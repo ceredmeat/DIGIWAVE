@@ -1,0 +1,16 @@
+{
+ "id": "digiwave",
+ "version": "0.4",
+ "title": "DIGIWAVE: PPG-style wavetable machine",
+ "category": "Machines",
+ "license": "GPL-2.0-or-later",
+ "author": "Cere, made with Claude",
+ "description": "DIGIWAVE, a wavetable SRC machine in the PPG manner: two wavetable oscillators and a sub per track, 26 tables of 16 waves in 8 bits (22 made fresh: PWM, harmonic and odd builds, resonant saw and square, vowels, sync, FM, folds, phase distortion, grit and more; 4 from the Jomox Alphabase). WAVE picks the place in the table and a decay envelope sweeps it (ENV, DEC); STEP goes from smooth sweeps to hard PPG steps; BITS crushes. Page 2: osc 2's table, wave offset, tune, detune, mix, the sub, and VIEW, a 3D picture of the table. TABL and WAVE draw the table and the wave they play. The Digitakt's filter, amp, LFO and FX follow as on a sample. Machine 33. Needs machine-pages 1.5 or newer.",
+ "device": "digitakt-mk1",
+ "os": "1.54",
+ "sources": ["digiwave.c"],
+ "machines": [{"id": 33, "descriptor": "dw_machine"}],
+ "subscribe": [{"event": "ev_render_voices", "fn": "dw_render", "order": 20}],
+ "requires": ["core", "machine-pages"],
+ "resources": {"core": "3.0"}
+}
