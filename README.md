@@ -1,4 +1,4 @@
-# DIGIWAVE 0.4 (Digitakt MKI, OS 1.54)
+# DIGIWAVE 0.5 (Digitakt MKI, OS 1.54)
 
 A wavetable machine in the PPG manner. Pick it with **FUNC + SRC** (machine menu) on an audio track.
 The Digitakt's own filter, amp envelope, LFO and FX work on it as on a sample.
@@ -57,7 +57,7 @@ flexmods loaded, six DIGIWAVE tracks playing at once run smoothly; seven start t
 
 ## Install
 
-Load `digiwave-0.4.elemod` in Elekloader with **core** and **machine-pages** (1.5 or newer), build
+Load `digiwave-0.5.elemod` in Elekloader with **core** and **machine-pages** (1.5 or newer), build
 your OS and flash it. No `.syx` is shared here: it would contain Elektron's firmware.
 
 ## Notes
@@ -68,3 +68,10 @@ included). Machine id 33. Page 2's values use sound slots
 Locks or Deja Vu's RND destinations.
 
 Licence: GPL-2.0-or-later (see LICENSE). By Cere, made with Claude.
+
+## Changes
+
+| Version | What changed |
+|---|---|
+| 0.5 | The WAVE, STEP, MIX and SUB knobs show their values as numbers. |
+| 0.4 | First release. |

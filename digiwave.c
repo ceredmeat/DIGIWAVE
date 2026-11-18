@@ -324,6 +324,18 @@ static int32_t draw_view(void *bmp, int32_t x, int32_t y, int32_t value, int32_t
     return 1;
 }
 
+static int32_t num_text(char *buf, int32_t value, int32_t ctx, int32_t m)    /* 0-127, as a number */
+{
+    int32_t v = (value >> 8) < 0 ? 0 : (value >> 8) > 127 ? 127 : (value >> 8), i = 0;
+    char d[4];
+    int n = 0;
+    (void)ctx; (void)m;
+    do { d[n++] = (char)('0' + v % 10); v /= 10; } while (v);
+    while (n) buf[i++] = d[--n];
+    buf[i] = 0;
+    return 1;
+}
+
 /* ---- the page ------------------------------------------------------------------------------------- */
 
 #define KNOB(nm, ln, d, f) { .name = nm, .lname = ln, .look = 0x86, .flags = CM_RANGE | CM_DEFAULT, \
@@ -344,12 +356,12 @@ static const struct cm_ui32 dw_page = {
         .group = "DIGIWAVE",
         .knob = {
             [K_TABL] = DRAWN("TABL", "Wavetable", 0, tabl_text, draw_tabl),
-            [K_WAVE] = DRAWN("WAVE", "Wave position", 0, 0, draw_wave),
+            [K_WAVE] = DRAWN("WAVE", "Wave position", 0, num_text, draw_wave),
             [K_ENV] = { .name = "ENV", .lname = "Wave envelope", .look = 0x86,
                         .flags = CM_RANGE | CM_DEFAULT | CM_NOT_SAMPLE, .max = 0x7f00, .def = 64 << 8,
                         .fmt = bip_text },
             [K_DEC] = KNOB("DEC", "Wave env decay", 64, dec_text),
-            [K_STEP] = KNOB("STEP", "Smooth to stepped", 0, 0),
+            [K_STEP] = KNOB("STEP", "Smooth to stepped", 0, num_text),
             [K_BITS] = KNOB("BITS", "Bit crush", 0, bits_text),
         },
     },
@@ -358,8 +370,8 @@ static const struct cm_ui32 dw_page = {
         KNOB("OFS", "Osc 2 wave offset", 64, bip_text),
         KNOB("TUN2", "Osc 2 tune", 64, tun2_text),
         KNOB("DET", "Osc 2 detune", 0, det_text),
-        KNOB("MIX", "Osc 1 / 2 mix", 0, 0),
-        KNOB("SUB", "Sub oscillator", 0, 0),
+        KNOB("MIX", "Osc 1 / 2 mix", 0, num_text),
+        KNOB("SUB", "Sub oscillator", 0, num_text),
         DRAWN("VIEW", "Wavetable view", 0, view_text, draw_view),
     },
     .page_count = 2,
